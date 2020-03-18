@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录页面</title>
+    <link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../css/nprogress.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../css/font-awesome.min.css}">
+    <link rel="apple-touch-icon-precomposed" th:href="@{../images/icon.png}">
+    <link rel="shortcut icon" href="../static/images/icon1.jpg" th:href="@{../images/icon1.jpg}">
+
+    <!--<link th:href="@{bootstrap-4.3.1-dist/css/bootstrap.min.css}" rel="stylesheet">-->
+    <script th:href="@{https://code.jquery.com/jquery.js}"></script>
+    <script th:href="@{bootstrap-4.3.1-dist/js/bootstrap.js}"></script>
+
+    <!--[if gte IE 9]>
+    <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="js/html5shiv.min.js" type="text/javascript"></script>
+    <script src="js/respond.min.js" type="text/javascript"></script>
+    <script src="js/selectivizr-min.js" type="text/javascript"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script>window.location.href='upgrade-browser.html';</script>
+    <![endif]-->
+
+    <style>
+        .container1 {
+            margin-top: 70px;
+            width: 45%;
+            margin-left: 30%;
+        }
+
+        /* 需要在一行的元素 */
+        .inline-style {
+            display: inline-block;
+        }
+        /* 文字需要靠右 */
+        .font-position-right{
+            text-align: right;
+        }
+        /* 注册按钮 */
+        .register-btn{
+            margin-left: -10%;
+        }
+    </style>
+</head>
+<body class="user-select">
+<nav th:fragment="common-menu" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+    <header class="header">
+        <nav class="navbar navbar-default" id="navbar">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar" aria-expanded="false"> <span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+
+                    <h1 class="logo hvr-bounce-in">
+                        <img src="../static/images/icon1.jpg" alt="头像图片" th:src="@{../images/icon1.jpg}" width="50" height="50">
+                        <a title="首页" href="#" th:href="@{/index}">&nbsp&nbsp个人知识分享系统
+                        </a></h1>
+                </div>
+
+
+                <div class="collapse navbar-collapse" id="header-navbar">
+                    <form class="navbar-form visible-xs" action="/Search" method="post">
+                        <div class="input-group">
+                            <input type="text" name="keyword" class="form-control" placeholder="请输入关键字" maxlength="20" autocomplete="off">
+                            <span class="input-group-btn">
+            <button class="btn btn-default btn-search" name="search" type="submit">搜索</button>
+            </span> </div>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a data-cont="首页" title="首页" href="#" th:href="@{/index}">首页</a></li>
+                        <li><a data-cont="登录" title="登录" href="#" th:href="@{/reg}">注册</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+</nav>
+<div class="container1">
+
+    <form class="ui large form"  id="form-test" method="post" action="#"  name="loginForm"  th:action="@{/admin/login}" onsubmit="return myFunction()" >
+        <div class="field">
+            <!--<h2 class="form-signin-heading">注册</h2>-->
+            <!-- class="sr-only"将label标签隐藏 -->
+            <label for="exampleInputUsername1" class="col-sm-2 control-label inline-style font-position-right">用户名</label>
+            <div class="col-sm-9 inline-style ">
+                <input type="text" class="form-control" id="exampleInputUsername1"  name="username"  placeholder="用户名">
+            </div>
+        </div>
+        <div class="field">
+            <!--<h2 class="form-signin-heading">注册</h2>-->
+            <label for="exampleInputUsername1" class="col-sm-2 control-label  inline-style font-position-right">密码</label>
+            <div class="col-sm-9  inline-style">
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="密码">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox">
+                        记住密码
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-lg btn-primary btn-block register-btn" type="submit" >登录</button>
+            </div>
+            <div class="" th:unless="${#strings.isEmpty(message)}">
+                <i class=""></i>
+                <div class="header">提示：</div>
+                <p th:text="${message}">恭喜，操作成功！</p>
+            </div>
+        </div>
+    </form>
+
+</div>
+<!--<script type="text/javascript"  src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script  type="text/jasvascript" th:src="@{../js/jquery.ias.js}"></script>
+<script  type="text/javascript" th:src="@{../js/bootstrap.min.js}"></script>
+
+
+<script>
+        function myFunction(){
+                    var x=document.forms["form"]["username"].value;
+                        if(x=null||x=="")
+                        {
+                            alert("请输入名字！！");
+                             return false;
+                       }
+        var y=document.forms["form"]["password"].value;
+        if(y=null||y=="")
+        {
+            alert("请输入密码！！");
+            return false;
+        }else{
+            alert("登录成功");
+        }
+               }
+     /*  function login(){
+           $("#loginForm").validate({
+               submitHandler:function(form){
+                   doLogin();
+               }
+           });
+       }
+       function doLogin(){
+           g_showLoading();
+
+           var inputPass = $("#password").val();
+
+           $.ajax({
+               url: "/login/do_login",
+               type: "POST",
+               data:{
+                   mobile:$("#username").val(),
+                   password: password
+               },
+               success:function(data){
+                   layer.closeAll();
+                   if(data.code == 0){
+                       layer.msg("成功");
+                       window.location.href="/admin/adminindex";
+                   }else{
+                       layer.msg(data.msg);
+                   }
+               },
+               error:function(){
+                   layer.closeAll();
+               }
+           });
+       }*/
+</script>
+</body>
+</html>
